@@ -1,0 +1,12 @@
+Flask==3.0.2
+google-genai
+PyMuPDF
+python-dotenv
+requests==2.31.0
+beautifulsoup4
+Flask-SQLAlchemy
+psycopg2-binary
+gunicorn
+Flask-Cors
+python-jobspy
+pandas

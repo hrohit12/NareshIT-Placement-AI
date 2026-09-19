@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | NareshIT Placement AI</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            padding-top: 100px;
+            /* account for navbar */
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .admin-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+
+        .admin-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-dark);
+            font-family: var(--font-family);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.875rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-light);
+        }
+
+        .jobs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .jobs-table th,
+        .jobs-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .jobs-table th {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .jobs-table td {
+            color: var(--text-dark);
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.2s ease;
+            padding: 0.25rem;
+        }
+
+        .btn-icon:hover {
+            color: var(--primary);
+        }
+
+        .btn-icon.delete:hover {
+            color: #ef4444;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge.published {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+
+        .badge.draft {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo" style="text-decoration: none;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+                NareshIT Placement AI
+            </a>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <span style="color: var(--primary); font-weight: 600;">Admin Panel</span>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
+                    <svg class="theme-toggle-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <mask id="moon-mask">
+                            <rect x="0" y="0" width="100%" height="100%" fill="white" />
+                            <circle class="moon-mask-circle" cx="24" cy="10" r="6" fill="black" />
+                        </mask>
+                        <circle class="sun-moon-circle" cx="12" cy="12" r="5" mask="url(#moon-mask)"
+                            fill="currentColor"></circle>
+                        <g class="sun-rays">
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </g>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>Exclusive Jobs Management</h1>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Form Section -->
+            <div class="admin-card">
+                <h2 style="margin-top:0; margin-bottom: 1.5rem; color: var(--text-dark);">Add / Edit Job</h2>
+                <form id="jobForm">
+                    <input type="hidden" id="jobId" value="">
+                    <div class="form-group">
+                        <label>Job Title</label>
+                        <input type="text" id="title" required placeholder="e.g. Product Designer">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="description" rows="3" required
+                            placeholder="Short description of the role"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Link (URL)</label>
+                        <input type="url" id="link" required placeholder="https://..." value="#">
+                    </div>
+                    <div class="form-group">
+                        <label>Logo URL (Optional)</label>
+                        <input type="url" id="logoUrl" placeholder="https://.../logo.png">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Badge Color</label>
+                            <select id="badgeColor" required>
+                                <option value="blue">Blue</option>
+                                <option value="pink">Pink</option>
+                                <option value="success">Success (Green)</option>
+                                <option value="indigo">Indigo</option>
+                                <option value="orange">Orange</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Badge Text</label>
+                            <input type="text" id="badgeText" required placeholder="e.g. Design">
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" id="location" required placeholder="e.g. Remote">
+                        </div>
+                        <div class="form-group">
+                            <label>Job Type</label>
+                            <input type="text" id="type" required placeholder="e.g. Full-time">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="status" required>
+                            <option value="Published">Published</option>
+                            <option value="Draft">Draft</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-submit" id="submitBtn">Save Job</button>
+                    <button type="button" class="btn-submit" id="cancelBtn"
+                        style="background: transparent; border: 1px solid var(--border); margin-top: 0.5rem; display: none;">Cancel
+                        Edit</button>
+                </form>
+            </div>
+
+            <!-- List Section -->
+            <div class="admin-card" style="overflow-x: auto;">
+                <h2 style="margin-top:0; margin-bottom: 1.5rem; color: var(--text-dark);">All Jobs</h2>
+                <table class="jobs-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Department</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="jobsTableBody">
+                        <tr>
+                            <td colspan="4" style="text-align: center; padding: 2rem;">Loading jobs...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+
+            fetchJobs();
+        });
+
+        // Job Management Logic
+        const API_URL = 'http://127.0.0.1:5000/api/exclusive-jobs';
+        let currentJobs = [];
+
+        async function fetchJobs() {
+            try {
+                const response = await fetch(API_URL);
+                currentJobs = await response.json();
+                renderJobsTable();
+            } catch (error) {
+                console.error("Error fetching jobs:", error);
+            }
+        }
+
+        function renderJobsTable() {
+            const tbody = document.getElementById('jobsTableBody');
+            tbody.innerHTML = '';
+
+            if (currentJobs.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted);">No jobs found. Add one to get started.</td></tr>`;
+                return;
+            }
+
+            currentJobs.forEach(job => {
+                const tr = document.createElement('tr');
+
+                // Status Badge
+                const statusBadge = `<span class="badge ${job.status.toLowerCase()}">${job.status}</span>`;
+
+                tr.innerHTML = `
+                    <td>
+                        <div style="font-weight: 500;">${job.title}</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">${job.location} • ${job.type}</div>
+                    </td>
+                    <td>${job.badge_text}</td>
+                    <td>${statusBadge}</td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="btn-icon" onclick="editJob(${job.id})" title="Edit">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                            </button>
+                            <button class="btn-icon delete" onclick="deleteJob(${job.id})" title="Delete">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        document.getElementById('jobForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const jobId = document.getElementById('jobId').value;
+
+            const payload = {
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                link: document.getElementById('link').value,
+                logoUrl: document.getElementById('logoUrl').value,
+                badgeColor: document.getElementById('badgeColor').value,
+                badgeText: document.getElementById('badgeText').value,
+                location: document.getElementById('location').value,
+                type: document.getElementById('type').value,
+                status: document.getElementById('status').value
+            };
+
+            const method = jobId ? 'PUT' : 'POST';
+            const url = jobId ? `${API_URL}/${jobId}` : API_URL;
+
+            try {
+                const response = await fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    resetForm();
+                    fetchJobs();
+                }
+            } catch (error) {
+                console.error("Error saving job:", error);
+            }
+        });
+
+        function editJob(id) {
+            const job = currentJobs.find(j => j.id === id);
+            if (!job) return;
+
+            document.getElementById('jobId').value = job.id;
+            document.getElementById('title').value = job.title;
+            document.getElementById('description').value = job.description;
+            document.getElementById('link').value = job.link;
+            document.getElementById('logoUrl').value = job.logo_url || '';
+            document.getElementById('badgeColor').value = job.badge_color;
+            document.getElementById('badgeText').value = job.badge_text;
+            document.getElementById('location').value = job.location;
+            document.getElementById('type').value = job.type;
+            document.getElementById('status').value = job.status;
+
+            document.getElementById('submitBtn').textContent = 'Update Job';
+            document.getElementById('cancelBtn').style.display = 'block';
+        }
+
+        document.getElementById('cancelBtn').addEventListener('click', resetForm);
+
+        function resetForm() {
+            document.getElementById('jobForm').reset();
+            document.getElementById('jobId').value = '';
+            document.getElementById('submitBtn').textContent = 'Save Job';
+            document.getElementById('cancelBtn').style.display = 'none';
+        }
+
+        async function deleteJob(id) {
+            if (confirm('Are you sure you want to delete this job?')) {
+                try {
+                    const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+                    if (response.ok) fetchJobs();
+                } catch (error) {
+                    console.error("Error deleting job:", error);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

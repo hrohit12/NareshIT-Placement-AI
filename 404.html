@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Not Found | NareshIT Placement AI</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .glitch-wrapper {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .glitch {
+            font-size: 8rem;
+            font-weight: 800;
+            line-height: 1;
+            margin: 0;
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .error-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin: 0 0 1rem 0;
+            color: var(--text-dark);
+        }
+
+        .error-desc {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+        
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Abstract glowing background behind the card */
+        .glow-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 6s infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+
+
+    <main class="main-content">
+        <div class="glow-orb"></div>
+        <div class="card error-container floating">
+            <div class="glitch-wrapper">
+                <h1 class="glitch">404</h1>
+            </div>
+            <h2 class="error-title">Lost in the Void</h2>
+            <p class="error-desc">The page you are looking for has drifted into deep space or never existed. Let's get you back on track.</p>
+            <a href="/" class="btn btn-primary" style="text-decoration:none;">Return to Base</a>
+        </div>
+    </main>
+
+    <script>
+        // Inline script to restore theme from local storage
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        });
+    </script>
+</body>
+</html>

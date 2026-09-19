@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: nareshit-placement-ai
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.12
+      - key: DATABASE_URL
+        fromDatabase:
+          name: nareshit-db
+          property: connectionString
+      - key: GEMINI_API_KEY
+        sync: false # Requires manual entry in the dashboard
+
+databases:
+  - name: nareshit-db
+    databaseName: placement_db
+    user: placement_user
+    plan: free

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NareshIT Placement AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- MapLibre GL JS -->
+    <script src="https://unpkg.com/maplibre-gl@3.3.1/dist/maplibre-gl.js"></script>
+    <link href="https://unpkg.com/maplibre-gl@3.3.1/dist/maplibre-gl.css" rel="stylesheet" />
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="showSection('home')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+                NareshIT Placement AI
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-item active" data-target="home" onclick="showSection('home')">Home</a></li>
+                <li><a href="#" class="nav-item" data-target="exclusive-jobs" onclick="showSection('exclusive-jobs')">Exclusive Jobs</a></li>
+                <li><a href="#" class="nav-item" data-target="resume-maker" onclick="showSection('resume-maker')">Resume Maker</a></li>
+                <li><a href="#" class="nav-item" data-target="job-search" onclick="showSection('job-search')">Job Search Map</a></li>
+                <li><a href="#" class="nav-item" data-target="resume-match" onclick="showSection('resume-match')">Resume Match</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <div style="display: flex; align-items: center;">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
+                    <svg class="theme-toggle-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <mask id="moon-mask">
+                            <rect x="0" y="0" width="100%" height="100%" fill="white" />
+                            <circle class="moon-mask-circle" cx="24" cy="10" r="6" fill="black" />
+                        </mask>
+                        <circle class="sun-moon-circle" cx="12" cy="12" r="5" mask="url(#moon-mask)" fill="currentColor"></circle>
+                        <g class="sun-rays">
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </g>
+                    </svg>
+                </button>
+                <!-- Mobile Menu Toggle -->
+                <div class="menu-toggle" onclick="toggleMobileMenu()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="main-content">
+
+        <!-- ================= HOME SECTION ================= -->
+        <section id="home" class="view-section active">
+            <div class="hero">
+                <div class="badge">Version 1.0</div>
+                <h1>Your AI Placement Assistant</h1>
+                <p>Build a better resume. Find better opportunities. Know your job readiness.</p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary" onclick="showSection('resume-maker')">Start Building Resume</button>
+                    <button class="btn btn-secondary" onclick="showSection('job-search')">Explore Jobs</button>
+                </div>
+            </div>
+
+            <div class="stats-banner">
+                <div class="stat-item"><span class="stat-icon">✨</span> AI-powered</div>
+                <div class="stat-item"><span class="stat-icon">📄</span> ATS-friendly</div>
+                <div class="stat-item"><span class="stat-icon">🎯</span> Job matching</div>
+                <div class="stat-item"><span class="stat-icon">🎓</span> Student focused</div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card" onclick="showSection('resume-maker')">
+                    <div class="icon-wrapper blue">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                    </div>
+                    <h3>AI Resume Maker</h3>
+                    <p>Generate a professional, ATS-optimized resume in seconds using Gemini AI.</p>
+                </div>
+                <div class="feature-card" onclick="showSection('job-search')">
+                    <div class="icon-wrapper green">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </div>
+                    <h3>Job Search Agent</h3>
+                    <p>Discover live job postings from major boards matched to your skills.</p>
+                </div>
+                <div class="feature-card" onclick="showSection('resume-match')">
+                    <div class="icon-wrapper purple">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Resume Match</h3>
+                    <p>Compare your PDF resume against a Job Description to get an ATS readiness score.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-wrapper orange">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                    </div>
+                    <h3>AI Career Insights</h3>
+                    <p>Receive actionable feedback on your missing skills and how to improve.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= RESUME MAKER ================= -->
+        <section id="resume-maker" class="view-section">
+            <div class="section-header">
+                <h2>Free ATS-friendly Resume Maker</h2>
+                <p>Fill out your details, and our AI will format and enhance your content for ATS systems.</p>
+            </div>
+
+            <div class="card form-card">
+                <form id="resumeForm">
+
+                    <div class="form-section">
+                        <h3 class="section-title">Personal Information</h3>
+                        <div class="input-grid">
+                            <div class="input-group"><label>Full Name</label><input type="text" id="r_name" required>
+                            </div>
+                            <div class="input-group"><label>Email</label><input type="email" id="r_email" required>
+                            </div>
+                            <div class="input-group"><label>Phone</label><input type="text" id="r_phone" required></div>
+                            <div class="input-group"><label>Location</label><input type="text" id="r_location" required>
+                            </div>
+                            <div class="input-group"><label>LinkedIn (Optional)</label><input type="url"
+                                    id="r_linkedin"></div>
+                            <div class="input-group"><label>GitHub (Optional)</label><input type="url" id="r_github">
+                            </div>
+                            <div class="input-group full-width"><label>Portfolio (Optional)</label><input type="url"
+                                    id="r_portfolio"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3 class="section-title">Education & Career</h3>
+                        <div class="input-grid">
+                            <div class="input-group"><label>Degree</label><input type="text" id="r_degree" required>
+                            </div>
+                            <div class="input-group"><label>College/University</label><input type="text" id="r_college"
+                                    required></div>
+                            <div class="input-group"><label>Graduation Year</label><input type="text" id="r_grad_year"
+                                    required></div>
+                            <div class="input-group"><label>Target Job Role</label><input type="text" id="r_target_role"
+                                    placeholder="e.g. Software Engineer" required></div>
+                            <div class="input-group full-width"><label>Experience Level</label>
+                                <select id="r_exp_level" class="custom-select">
+                                    <option value="Fresher">Fresher</option>
+                                    <option value="1-3 Years">1-3 Years</option>
+                                    <option value="3+ Years">3+ Years</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3 class="section-title">Skills</h3>
+                        <div class="input-grid">
+                            <div class="input-group full-width">
+                                <label>Technical Skills (comma separated)</label>
+                                <input type="text" id="r_tech_skills" placeholder="e.g. Python, JavaScript, SQL"
+                                    required>
+                            </div>
+                            <div class="input-group full-width">
+                                <label>Soft Skills (comma separated)</label>
+                                <input type="text" id="r_soft_skills" placeholder="e.g. Communication, Teamwork"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="section-title-row">
+                            <h3 class="section-title">Projects</h3>
+                            <button type="button" class="btn btn-ghost btn-sm" onclick="addProject()">+ Add
+                                Project</button>
+                        </div>
+                        <div id="projects-container">
+                            <div class="dynamic-item project-item">
+                                <div class="item-header">Project 1 <span class="remove-btn"
+                                        onclick="this.parentElement.parentElement.remove()">✕</span></div>
+                                <div class="input-grid">
+                                    <div class="input-group"><label>Project Name</label><input type="text"
+                                            class="p_name"></div>
+                                    <div class="input-group"><label>Technologies Used</label><input type="text"
+                                            class="p_tech"></div>
+                                    <div class="input-group full-width"><label>Description</label><textarea
+                                            class="p_desc" rows="3"></textarea></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="section-title-row">
+                            <h3 class="section-title">Experience</h3>
+                            <button type="button" class="btn btn-ghost btn-sm" onclick="addExperience()">+ Add
+                                Experience</button>
+                        </div>
+                        <div id="experience-container">
+                            <div class="dynamic-item experience-item">
+                                <div class="item-header">Experience 1 <span class="remove-btn"
+                                        onclick="this.parentElement.parentElement.remove()">✕</span></div>
+                                <div class="input-grid">
+                                    <div class="input-group"><label>Company</label><input type="text" class="e_company">
+                                    </div>
+                                    <div class="input-group"><label>Role</label><input type="text" class="e_role"></div>
+                                    <div class="input-group">
+                                        <label>Start Date</label>
+                                        <div class="datepicker-wrapper">
+                                            <input type="text" class="e_start_date datepicker-input" placeholder="Pick a date" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label>End Date</label>
+                                        <div class="datepicker-wrapper">
+                                            <input type="text" class="e_end_date datepicker-input" placeholder="Pick a date" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="input-group full-width"><label>Description</label><textarea
+                                            class="e_desc" rows="3"></textarea></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section border-0">
+                        <div class="section-title-row">
+                            <h3 class="section-title">Certifications</h3>
+                            <button type="button" class="btn btn-ghost btn-sm" onclick="addCertification()">+ Add Certification</button>
+                        </div>
+                        <div id="certifications-container">
+                            <!-- Certifications added dynamically -->
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; display: flex; justify-content: flex-end;">
+                        <button type="submit" class="btn btn-primary" style="font-size: 1rem; padding: 0.75rem 2rem; border-radius: 9999px; box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.39);">
+                            ✨ Generate Resume with AI
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Resume Preview (Hidden until generated) -->
+            <div id="resume-preview-section" class="hidden mt-8">
+                <div class="flex-between mb-4">
+                    <h3>Your AI Generated Resume</h3>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" class="mr-2">
+                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                            <rect x="6" y="14" width="12" height="8"></rect>
+                        </svg>
+                        Print / PDF
+                    </button>
+                </div>
+                <div class="resume-document shadow-lg">
+                    <div id="resume-preview"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exclusive Jobs Section -->
+        <section id="exclusive-jobs" class="view-section">
+            <div class="exclusive-jobs-header">
+                <h2>Open Positions</h2>
+                <p>Exclusive placement opportunities curated by NareshIT. Join our partners today!</p>
+            </div>
+            <div id="exclusive-jobs-filters" style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; padding: 0 1rem;">
+                <!-- Filters will be injected here -->
+            </div>
+            <div class="exclusive-jobs-container">
+                <ul id="exclusive-jobs-list" class="exclusive-jobs-list">
+                    <!-- Jobs will be rendered here dynamically -->
+                </ul>
+            </div>
+        </section>
+
+        <!-- JOB SEARCH MAP -->
+        <section id="job-search" class="view-section">
+            <div class="fullscreen-map-layout">
+                <!-- Map Background -->
+                <div id="jobs-map" class="fullscreen-map"></div>
+
+                <!-- Floating Sidebar -->
+                <!-- Left Sidebar: Search Form -->
+                <div class="floating-sidebar">
+                    <div class="sidebar-header" style="background: none; padding: 0 0 0.5rem 0; pointer-events: none;">
+                        <h2 style="text-shadow: 0 2px 4px rgba(255,255,255,0.5);">AI Job Search</h2>
+                        <p style="text-shadow: 0 1px 2px rgba(255,255,255,0.5); font-weight: 500;">Find opportunities
+                            around you.</p>
+                    </div>
+
+                    <div class="search-glass-card mb-4" style="pointer-events: auto;">
+                        <form id="jobSearchForm" class="clean-search-form">
+                            <div class="input-group">
+                                <label>Job Role</label>
+                                <input type="text" id="j_role" placeholder="e.g. Frontend Developer" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Location</label>
+                                <div class="location-input-wrapper">
+                                    <input type="text" id="j_location" placeholder="City or State" required>
+                                    <button type="button" class="icon-btn" id="use-my-location-btn"
+                                        title="Use My Location">📍</button>
+                                </div>
+                            </div>
+
+                            <div class="input-row">
+                                <div class="input-group flex-1">
+                                    <label>Distance</label>
+                                    <select id="j_radius">
+                                        <option value="5">5 km</option>
+                                        <option value="10">10 km</option>
+                                        <option value="25" selected>25 km</option>
+                                        <option value="50">50 km</option>
+                                        <option value="100">100 km</option>
+                                        <option value="Anywhere">Anywhere</option>
+                                    </select>
+                                </div>
+                                <div class="input-group flex-1">
+                                    <label>Experience</label>
+                                    <select id="j_exp">
+                                        <option value="Any">Any</option>
+                                        <option value="Fresher">Fresher</option>
+                                        <option value="0-1 years">0-1 years</option>
+                                        <option value="1-3 years">1-3 years</option>
+                                        <option value="3+ years">3+ years</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-full mt-2" id="j_submit_btn">Search
+                                Jobs</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar: Results & Filters -->
+                <div class="floating-sidebar floating-sidebar-right">
+                    <div class="search-glass-card mb-4" style="padding: 1rem; pointer-events: auto;">
+                        <div class="map-filters"
+                            style="padding: 0; display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+                            <button class="btn btn-primary btn-sm active" data-filter="all">All</button>
+                            <button class="btn btn-secondary btn-sm" data-filter="nearest">Nearest</button>
+                            <button class="btn btn-secondary btn-sm" data-filter="best-match">Best Match</button>
+                            <button class="btn btn-secondary btn-sm" data-filter="remote">Remote</button>
+                        </div>
+                    </div>
+
+                    <div id="job-summary" class="summary-box"
+                        style="display: none; border-radius: 12px; pointer-events: auto;">
+                        <div class="summary-total" id="job-summary-total">Found 0 jobs</div>
+                        <div class="summary-details" id="job-summary-breakdown">0 mapped &bull; 0 remote &bull; 0
+                            unmapped</div>
+                    </div>
+
+                    <div id="jobLoading" class="search-glass-card multi-step-loader-container"
+                        style="display: none; padding: 2rem; pointer-events: auto; height: 160px; justify-content: center; overflow: hidden; position: relative;">
+                        <!-- JS will inject steps here -->
+                    </div>
+
+                    <div id="job-results" class="job-list-container" style="pointer-events: auto;">
+                        <div id="job-empty-state" class="empty-state">
+                            <div class="empty-icon">🔍</div>
+                            <h3>No jobs loaded</h3>
+                            <p>Enter a role and location above.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location Permission Overlay (floats over map if needed) -->
+                <div id="location-permission-card" class="permission-overlay" style="display: none;">
+                    <div class="permission-card card">
+                        <h3>🗺️ Find Jobs Near You</h3>
+                        <p>Allow location access to discover relevant opportunities around your current location.</p>
+                        <div style="display:flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+                            <button class="btn btn-primary" id="btn-allow-location">Allow Location</button>
+                            <button class="btn btn-secondary" id="btn-deny-location">Search Manually</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= RESUME MATCH ================= -->
+        <section id="resume-match" class="view-section">
+            <div class="section-header">
+                <h2>Check Resume Against Job</h2>
+                <p>Ensure your resume passes the ATS by checking it against a specific job description.</p>
+            </div>
+
+            <div class="match-layout">
+                <div class="card match-input-card">
+                    <form id="resumeMatchForm">
+                        <div class="form-group">
+                            <label>1. Upload PDF Resume</label>
+                            <div class="ace-file-upload" id="fileDropArea">
+                                <input class="file-input" type="file" id="m_pdf" accept=".pdf" required hidden>
+
+                                <div class="ace-box ace-box-1"></div>
+                                <div class="ace-box ace-box-2"></div>
+
+                                <div class="ace-box-main" id="file-content">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" class="ace-icon">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="17 8 12 3 7 8"></polyline>
+                                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                                    </svg>
+                                    <h4 class="ace-title">Upload your Resume</h4>
+                                    <p class="file-msg">Drag and drop or click to browse</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-6">
+                            <label>2. Paste Job Description</label>
+                            <textarea id="m_jd" rows="10" class="custom-textarea"
+                                placeholder="Paste the full job description here..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large w-full mt-6" id="matchResumeBtn">
+                            Analyze Match Score
+                        </button>
+                    </form>
+                </div>
+
+                <div class="match-results-container">
+                    <!-- Empty State -->
+                    <div id="match-empty-state" class="empty-state card">
+                        <div class="empty-icon">📊</div>
+                        <h3>Awaiting Analysis</h3>
+                        <p>Upload a resume and job description to see your ATS readiness and insights.</p>
+                    </div>
+
+                    <!-- Results Area -->
+                    <div id="match-results" class="card hidden">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Global Components -->
+
+    <!-- Loader overlay -->
+    <div id="global-loader" class="loader-overlay hidden">
+        <div class="spinner-box">
+            <div class="spinner">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <p id="loader-text">Loading...</p>
+        </div>
+    </div>
+
+    <!-- Job Description Modal -->
+    <div id="job-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-job-title" class="job-title" style="margin-bottom:0;"></h3>
+                <button class="close-modal" onclick="closeJobModal()">&times;</button>
+            </div>
+            <div id="modal-job-company" class="job-company"
+                style="padding: 0 1.5rem 1rem; margin-bottom:0; border-bottom: 1px solid var(--border);"></div>
+            <div class="modal-body">
+                <p id="modal-job-desc" class="job-desc-full" style="white-space: pre-line; margin-top: 1rem;"></p>
+            </div>
+            <div class="modal-footer">
+                <a id="modal-job-apply" href="#" target="_blank" class="btn btn-primary"
+                    style="text-decoration:none;">Apply Now</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="datepicker.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
