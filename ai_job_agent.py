@@ -5,7 +5,9 @@ import subprocess
 import os
 
 def run_bun_cli(cli_path, cmd_args):
-    bun_exec = os.path.expanduser("~/.bun/bin/bun")
+    bun_exec = os.path.join(os.path.dirname(__file__), ".bun", "bin", "bun")
+    if not os.path.exists(bun_exec):
+        bun_exec = os.path.expanduser("~/.bun/bin/bun")
     try:
         cmd = [bun_exec, "run", "src/cli.ts", "search"] + cmd_args + ["--format", "json"]
         result = subprocess.run(cmd, cwd=cli_path, capture_output=True, text=True, check=True)
