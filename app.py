@@ -285,11 +285,11 @@ def search_jobs():
                 distance_km = haversine(search_center_lat, search_center_lon, lat, lon)
                 
             # Filter by radius if provided
-            if radius and radius != "Anywhere" and search_center_lat is not None and search_center_lon is not None:
-                if location_type == "remote":
-                    continue # Exclude remote from strict local radius search
-                if distance_km is not None and distance_km > float(radius):
-                    continue # Exclude out of bounds
+            # if radius and radius != "Anywhere" and search_center_lat is not None and search_center_lon is not None:
+            #     if location_type == "remote":
+            #         continue # Exclude remote from strict local radius search
+            #     if distance_km is not None and distance_km > float(radius):
+            #         continue # Exclude out of bounds
 
             counts["total"] += 1
             if location_type == "remote":
