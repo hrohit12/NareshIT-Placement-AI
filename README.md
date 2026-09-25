@@ -38,3 +38,6 @@ Please refer to the complete documentation package in the `docs/` directory:
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 Copyright (c) 2026 Rohit Satywan Kamble
+
+## Acknowledgments
+The job search agent in `/lib/JobSearchAgent/` is based on [ai-job-search](https://github.com/MadsLorentzen/ai-job-search) by Mads Lorentzen, used under the MIT License.
