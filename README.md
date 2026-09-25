@@ -34,3 +34,7 @@ Please refer to the complete documentation package in the `docs/` directory:
 8. [Testing](docs/TESTING.md)
 9. [Roadmap](docs/ROADMAP.md)
 10. [Documentation Index](docs/DOCUMENTATION_INDEX.md)
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
+Copyright (c) 2026 Rohit Satywan Kamble

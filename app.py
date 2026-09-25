@@ -1,3 +1,6 @@
+# Copyright (c) 2026 Rohit Satywan Kamble
+# Licensed under the MIT License. See LICENSE file for details.
+
 import os
 import json
 import logging
